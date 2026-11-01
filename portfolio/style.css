@@ -148,10 +148,10 @@ button { font: inherit; color: inherit; }
 /* Photo in the circle. Change the two numbers on the first line to reframe it:
    --zoom: 1 shows the whole picture, 2 or more zooms in toward the head and shoulders.
    --focus-y: the point of the picture (0% top, 100% bottom) that stays fixed while zooming. */
-.portrait { --zoom: 2.2; --focus-y: 40%; position: relative; width: 300px; height: 300px; border-radius: 50%; background: var(--tint); justify-self: center; }
-.portrait::after { content: ""; position: absolute; inset: 0; border: 1.5px solid var(--accent); border-radius: 50%; transform: translate(16px, 16px); z-index: -1; }
+.portrait { --zoom: 2.2; --shift-x: 8%; --shift-y: 6%; position: relative; width: 300px; height: 300px; border-radius: 50%; background: var(--tint); justify-self: center; }
+.portrait::after { display: none; }
 .photo { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; }
-.photo img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(var(--zoom)); transform-origin: 50% var(--focus-y); }
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; transform: translate(var(--shift-x), var(--shift-y)) scale(var(--zoom)); transform-origin: 50% 50%; }
 .initials { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--head); font-weight: 700; font-size: 5rem; color: var(--accent); letter-spacing: -0.03em; }
 
 /* Sections */
@@ -265,7 +265,7 @@ dialog[open] { animation: panel 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 48px; padding-bottom: 40px; }
   .portrait { order: -1; width: 200px; height: 200px; justify-self: start; }
-  .portrait::after { transform: translate(10px, 10px); }
+    .portrait::after { inset: -8px; }
   .initials { font-size: 3.4rem; }
   .two { grid-template-columns: 1fr; gap: 40px; }
   .nav-links { display: none; }
